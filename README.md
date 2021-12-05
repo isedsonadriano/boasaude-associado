@@ -1,9 +1,9 @@
-# boasaude (prestador)
+# boasaude (Associado)
 
 
 * Esse é parte do projeto final da especialização de arquitetura de software distribuído da Puc Minas;
 
-* Esse serviço é capaz de manter os dados de um prestador de saúde;
+* Esse serviço é capaz de manter os dados de um associado de saúde;
 
 * Apesar de ser um serviço simples, utilizei fundamentos de clean architecture para remover dependencias de framework da camada de domínio;
 

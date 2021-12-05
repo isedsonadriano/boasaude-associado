@@ -11,10 +11,10 @@
 		<relativePath />
 	</parent>
 
-	<groupId>br.com.boasaude.cadastro.prestador</groupId>
-	<artifactId>boasaude-prestador</artifactId>
+	<groupId>br.com.boasaude.cadastro.associado</groupId>
+	<artifactId>boasaude-associado</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>boasaude-prestador</name>
+	<name>boasaude-associado</name>
 	<packaging>war</packaging>
 
 	<properties>
