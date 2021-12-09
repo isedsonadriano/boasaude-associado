@@ -1,14 +1,11 @@
-package br.com.boasaude.cadastro.associado.core.domain.entity;
+package br.com.boasaude.cadastro.associado.infra.integration.dto;
 
-import br.com.boasaude.cadastro.associado.core.domain.vo.TipoPlano;
-
-public class Associado {
+public class AssociadoDTO {
 
 	private Long id;
 	private String nome;
 	private String cpf;
 	private String numeroCarteira;
-	private TipoPlano tipoPlano;
 
 	public Long getId() {
 		return id;
@@ -34,14 +31,6 @@ public class Associado {
 		this.cpf = cpf;
 	}
 
-	public TipoPlano getTipoPlano() {
-		return tipoPlano;
-	}
-
-	public void setTipoPlano(TipoPlano tipo) {
-		this.tipoPlano = tipo;
-	}
-
 	public String getNumeroCarteira() {
 		return numeroCarteira;
 	}
@@ -49,5 +38,4 @@ public class Associado {
 	public void setNumeroCarteira(String numeroCarteira) {
 		this.numeroCarteira = numeroCarteira;
 	}
-
 }

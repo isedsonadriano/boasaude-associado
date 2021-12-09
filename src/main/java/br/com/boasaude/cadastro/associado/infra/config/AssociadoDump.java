@@ -1,29 +1,33 @@
 package br.com.boasaude.cadastro.associado.infra.config;
 
+import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.event.ContextRefreshedEvent;
 import org.springframework.context.event.EventListener;
 
-import com.github.javafaker.Faker;
-
 import br.com.boasaude.cadastro.associado.core.domain.entity.Associado;
 import br.com.boasaude.cadastro.associado.core.domain.vo.TipoPlano;
 import br.com.boasaude.cadastro.associado.core.service.AssociadoService;
 import br.com.boasaude.cadastro.associado.core.util.Paginador;
+import br.com.boasaude.cadastro.associado.infra.integration.ConsultaAssociados;
+import br.com.boasaude.cadastro.associado.infra.integration.dto.AssociadoDTO;
+import br.com.boasaude.cadastro.associado.infra.integration.dto.AssociadosDTO;
 import lombok.extern.slf4j.Slf4j;
 
 @Configuration
 @Slf4j
 public class AssociadoDump {
 	
-	private static final int QUANTIDADE_ASSOCIADOS_DUMP = 50;
-
-	@Autowired
-	private Faker faker;
-	
 	@Autowired
 	private AssociadoService associadoService;
+	
+	@Autowired
+	private ConsultaAssociados consultaAssociados;
+	
+	@Autowired
+	protected ModelMapper modelMapper;
+	
 	
 	@EventListener(classes = ContextRefreshedEvent.class )
 	public void iniciarBancoDeDados () {
@@ -40,13 +44,15 @@ public class AssociadoDump {
 	}
 
 	private void inserirAssociadosDb() {
-		for (int i = 0; i < QUANTIDADE_ASSOCIADOS_DUMP; i++) {
+		AssociadosDTO associados = consultaAssociados.consulta();
+		for (AssociadoDTO dto : associados.getAssociados()) {
 			Associado associado = new Associado();
-			associado.setId(faker.random().nextLong());
-			associado.setNome(faker.company().name());
-			associado.setTipo(TipoPlano.getRandomTipoAssociado());
-			associado.setCpf(String.valueOf(faker.random().nextLong()));
-			
+			associado.setCpf(dto.getCpf());
+			associado.setId(dto.getId());
+			associado.setNome(dto.getNome());
+			associado.setCpf(associado.getCpf());
+			associado.setNumeroCarteira(dto.getNumeroCarteira());
+			associado.setTipoPlano(TipoPlano.EMPRESARIAL);
 			this.associadoService.salvar(associado);
 		}
 	}

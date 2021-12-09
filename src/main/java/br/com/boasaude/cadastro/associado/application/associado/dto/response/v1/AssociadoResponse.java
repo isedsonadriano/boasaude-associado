@@ -25,5 +25,11 @@ public class AssociadoResponse {
 
 	@ApiModelProperty(notes = "Cpf do associado", name = "cpf", required = true, value = "Teste Cpf")
 	private String cpf;
+	
+	@ApiModelProperty(notes = "Número da carteira  do associado", name = "cpf", required = true, value = "Teste Cpf")
+	private String numeroCarteira;
+	
+	@ApiModelProperty(notes = "Plano do associado", name = "cpf", required = true, value = "Teste Cpf")
+	private String tipoPlano;
 
 }

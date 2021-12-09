@@ -35,7 +35,7 @@ public class AssociadoRepositoryImpl implements AssociadoRepository {
 		Associado associado = new Associado();
 		associado.setNome(associadoJpa.getNome());
 		associado.setCpf(associadoJpa.getCpf());
-		associado.setTipo(associadoJpa.getTipo());
+		associado.setTipoPlano(associadoJpa.getTipo());
 		return associado;
 	}
 
@@ -71,7 +71,8 @@ public class AssociadoRepositoryImpl implements AssociadoRepository {
 		associado.setId(associadoJpa.getId());
 		associado.setNome(associadoJpa.getNome());
 		associado.setCpf(associadoJpa.getCpf());
-		associado.setTipo(TipoPlano.getRandomTipoAssociado());
+		associado.setNumeroCarteira(associadoJpa.getNumeroCarteira());
+		associado.setTipoPlano(TipoPlano.getRandomTipoAssociado());
 		return associado;
 	}
 
@@ -79,7 +80,9 @@ public class AssociadoRepositoryImpl implements AssociadoRepository {
 		AssociadoJpa associadoJpa = new AssociadoJpa();
 		associadoJpa.setNome(associado.getNome());
 		associadoJpa.setCpf(associado.getCpf());
-		associadoJpa.setTipo(associado.getTipo());
+		associadoJpa.setTipo(associado.getTipoPlano());
+		associadoJpa.setTipo(TipoPlano.EMPRESARIAL);
+		associadoJpa.setNumeroCarteira(associado.getNumeroCarteira());
 		return associadoJpa;
 	}
 

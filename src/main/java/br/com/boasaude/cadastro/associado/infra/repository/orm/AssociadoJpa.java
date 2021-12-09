@@ -25,6 +25,9 @@ public class AssociadoJpa {
 
 	@NotNull
 	private String cpf;
+	
+	@NotNull
+	private String numeroCarteira;
 
 	@NotNull
 	@Enumerated(EnumType.STRING)
@@ -60,6 +63,14 @@ public class AssociadoJpa {
 
 	public void setTipo(TipoPlano gender) {
 		this.tipo = gender;
+	}
+
+	public String getNumeroCarteira() {
+		return numeroCarteira;
+	}
+
+	public void setNumeroCarteira(String numeroCarteira) {
+		this.numeroCarteira = numeroCarteira;
 	}
 
 }
