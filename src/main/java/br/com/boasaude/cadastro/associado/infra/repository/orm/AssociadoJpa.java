@@ -1,5 +1,6 @@
 package br.com.boasaude.cadastro.associado.infra.repository.orm;
 
+import javax.persistence.Embedded;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
@@ -9,6 +10,7 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 
+import br.com.boasaude.cadastro.associado.core.domain.vo.Cpf;
 import br.com.boasaude.cadastro.associado.core.domain.vo.TipoPlano;
 
 
@@ -24,7 +26,8 @@ public class AssociadoJpa {
 	private String nome;
 
 	@NotNull
-	private String cpf;
+	@Embedded
+	private Cpf cpf;
 	
 	@NotNull
 	private String numeroCarteira;
@@ -32,6 +35,7 @@ public class AssociadoJpa {
 	@NotNull
 	@Enumerated(EnumType.STRING)
 	private TipoPlano tipo;
+	
 
 	public Long getId() {
 		return id;
@@ -49,14 +53,6 @@ public class AssociadoJpa {
 		this.nome = name;
 	}
 
-	public String getCpf() {
-		return cpf;
-	}
-
-	public void setCpf(String password) {
-		this.cpf = password;
-	}
-
 	public TipoPlano getTipo() {
 		return tipo;
 	}
@@ -71,6 +67,14 @@ public class AssociadoJpa {
 
 	public void setNumeroCarteira(String numeroCarteira) {
 		this.numeroCarteira = numeroCarteira;
+	}
+
+	public Cpf getCpf() {
+		return cpf;
+	}
+
+	public void setCpf(Cpf cpf) {
+		this.cpf = cpf;
 	}
 
 }

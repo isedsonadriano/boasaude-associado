@@ -7,6 +7,7 @@ import org.springframework.context.event.ContextRefreshedEvent;
 import org.springframework.context.event.EventListener;
 
 import br.com.boasaude.cadastro.associado.core.domain.entity.Associado;
+import br.com.boasaude.cadastro.associado.core.domain.vo.Cpf;
 import br.com.boasaude.cadastro.associado.core.domain.vo.TipoPlano;
 import br.com.boasaude.cadastro.associado.core.service.AssociadoService;
 import br.com.boasaude.cadastro.associado.core.util.Paginador;
@@ -47,7 +48,7 @@ public class AssociadoDump {
 		AssociadosDTO associados = consultaAssociados.consulta();
 		for (AssociadoDTO dto : associados.getAssociados()) {
 			Associado associado = new Associado();
-			associado.setCpf(dto.getCpf());
+			associado.setCpf(new Cpf(dto.getCpf()));
 			associado.setId(dto.getId());
 			associado.setNome(dto.getNome());
 			associado.setCpf(associado.getCpf());

@@ -9,6 +9,7 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
 
 import br.com.boasaude.cadastro.associado.core.domain.entity.Associado;
+import br.com.boasaude.cadastro.associado.core.domain.vo.Cpf;
 import br.com.boasaude.cadastro.associado.core.domain.vo.TipoPlano;
 import br.com.boasaude.cadastro.associado.core.repository.AssociadoRepository;
 import br.com.boasaude.cadastro.associado.core.util.Paginador;
@@ -53,7 +54,7 @@ public class AssociadoRepositoryImpl implements AssociadoRepository {
 	public void atualizar(Associado associado) {
 		Optional<AssociadoJpa> associadoJpa = this.repository.findById(associado.getId());
 		if (associadoJpa.isPresent()) {
-			associadoJpa.get().setCpf(associado.getCpf());
+			associadoJpa.get().setCpf(new Cpf(associado.getCpf().getNumero()));
 		}
 		this.repository.save(associadoJpa.get());
 	}

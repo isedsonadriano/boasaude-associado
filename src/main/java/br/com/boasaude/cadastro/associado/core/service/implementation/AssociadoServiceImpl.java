@@ -29,7 +29,7 @@ public class AssociadoServiceImpl implements AssociadoService {
 
 	@Override
 	public void salvar(Associado associado) {
-		DomainException.throwIf(Objects.nonNull(this.clientRepository.findByCpf(associado.getCpf())), "Associado já cadastrado");
+		DomainException.throwIf(Objects.nonNull(this.clientRepository.findByCpf(associado.getCpf().getNumero())), "Associado já cadastrado");
 		this.clientRepository.salvar(associado);
 	}
 
