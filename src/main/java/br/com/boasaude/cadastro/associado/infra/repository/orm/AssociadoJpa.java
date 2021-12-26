@@ -1,5 +1,7 @@
 package br.com.boasaude.cadastro.associado.infra.repository.orm;
 
+import java.time.LocalDateTime;
+
 import javax.persistence.Embedded;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
@@ -10,7 +12,10 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 
+import br.com.boasaude.cadastro.associado.core.domain.enums.Status;
 import br.com.boasaude.cadastro.associado.core.domain.vo.Cpf;
+import br.com.boasaude.cadastro.associado.core.domain.vo.Rg;
+import br.com.boasaude.cadastro.associado.core.domain.vo.TelefoneVO;
 import br.com.boasaude.cadastro.associado.core.domain.vo.TipoPlano;
 
 
@@ -18,8 +23,8 @@ import br.com.boasaude.cadastro.associado.core.domain.vo.TipoPlano;
 @Table(name = "boasaude_associado")
 public class AssociadoJpa {
 
-	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
+	@Id 
+	@GeneratedValue(strategy =  GenerationType.IDENTITY)
 	private Long id;
 
 	@NotNull
@@ -30,12 +35,31 @@ public class AssociadoJpa {
 	private Cpf cpf;
 	
 	@NotNull
+	@Embedded
+	private Rg rg;
+	
+	@NotNull
+	@Embedded
+	private TelefoneVO telefone;
+	
+	@NotNull
 	private String numeroCarteira;
+	
+	@NotNull
+	private String nomeDaMae;
+	
+	@NotNull
+	private Boolean titular;
+	
+	@NotNull
+	private LocalDateTime dataNascimento;
 
 	@NotNull
 	@Enumerated(EnumType.STRING)
 	private TipoPlano tipo;
 	
+	@NotNull
+	private Status status;
 
 	public Long getId() {
 		return id;
@@ -49,16 +73,32 @@ public class AssociadoJpa {
 		return nome;
 	}
 
-	public void setNome(String name) {
-		this.nome = name;
+	public void setNome(String nome) {
+		this.nome = nome;
 	}
 
-	public TipoPlano getTipo() {
-		return tipo;
+	public Cpf getCpf() {
+		return cpf;
 	}
 
-	public void setTipo(TipoPlano gender) {
-		this.tipo = gender;
+	public void setCpf(Cpf cpf) {
+		this.cpf = cpf;
+	}
+
+	public Rg getRg() {
+		return rg;
+	}
+
+	public void setRg(Rg rg) {
+		this.rg = rg;
+	}
+
+	public TelefoneVO getTelefone() {
+		return telefone;
+	}
+
+	public void setTelefone(TelefoneVO telefone) {
+		this.telefone = telefone;
 	}
 
 	public String getNumeroCarteira() {
@@ -69,12 +109,45 @@ public class AssociadoJpa {
 		this.numeroCarteira = numeroCarteira;
 	}
 
-	public Cpf getCpf() {
-		return cpf;
+	public String getNomeDaMae() {
+		return nomeDaMae;
 	}
 
-	public void setCpf(Cpf cpf) {
-		this.cpf = cpf;
+	public void setNomeDaMae(String nomeDaMae) {
+		this.nomeDaMae = nomeDaMae;
 	}
+
+	public Boolean getTitular() {
+		return titular;
+	}
+
+	public void setTitular(Boolean titular) {
+		this.titular = titular;
+	}
+
+	public LocalDateTime getDataNascimento() {
+		return dataNascimento;
+	}
+
+	public void setDataNascimento(LocalDateTime dataNascimento) {
+		this.dataNascimento = dataNascimento;
+	}
+
+	public TipoPlano getTipo() {
+		return tipo;
+	}
+
+	public void setTipo(TipoPlano tipo) {
+		this.tipo = tipo;
+	}
+
+	public Status getStatus() {
+		return status;
+	}
+
+	public void setStatus(Status status) {
+		this.status = status;
+	}
+	
 
 }

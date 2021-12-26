@@ -5,6 +5,8 @@ import java.util.Objects;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
+import javax.transaction.Transactional;
+
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
 
@@ -25,6 +27,7 @@ public class AssociadoRepositoryImpl implements AssociadoRepository {
 	}
 
 	@Override
+	@Transactional
 	public void salvar(Associado associado) {
 		AssociadoJpa associadoSalvo = repository.saveAndFlush(buildAssociadoJpa(associado));
 		associado.setId(associadoSalvo.getId());
@@ -35,8 +38,14 @@ public class AssociadoRepositoryImpl implements AssociadoRepository {
 		AssociadoJpa associadoJpa = repository.findById(id).get();
 		Associado associado = new Associado();
 		associado.setNome(associadoJpa.getNome());
+		associado.setNomeDaMae(associadoJpa.getNomeDaMae());
 		associado.setCpf(associadoJpa.getCpf());
+		associado.setRg(associadoJpa.getRg());
 		associado.setTipoPlano(associadoJpa.getTipo());
+		associado.setDataNascimento(associadoJpa.getDataNascimento());
+		associado.setStatus(associado.getStatus());
+		associado.setNumeroCarteira(associadoJpa.getNumeroCarteira());
+		associado.setTelefone(associadoJpa.getTelefone());
 		return associado;
 	}
 
@@ -46,7 +55,7 @@ public class AssociadoRepositoryImpl implements AssociadoRepository {
 	}
 
 	private List<Associado> capturarAssociadosBD(Paginador paginador) {
-		PageRequest paginaRetorno =   PageRequest.of(paginador.getPageNumber(), paginador.getPageSize(), Sort.by("id"));
+		PageRequest paginaRetorno =   PageRequest.of(paginador.getPageNumber(), paginador.getPageSize(), Sort.by("id").descending());
 		return repository.findAll(paginaRetorno).get().map(this::buildAssociado).collect(Collectors.toList());
 	}
 
@@ -54,7 +63,7 @@ public class AssociadoRepositoryImpl implements AssociadoRepository {
 	public void atualizar(Associado associado) {
 		Optional<AssociadoJpa> associadoJpa = this.repository.findById(associado.getId());
 		if (associadoJpa.isPresent()) {
-			associadoJpa.get().setCpf(new Cpf(associado.getCpf().getNumero()));
+			associadoJpa.get().setCpf(new Cpf(associado.getCpf().getNumeroCpf()));
 		}
 		this.repository.save(associadoJpa.get());
 	}
@@ -80,16 +89,23 @@ public class AssociadoRepositoryImpl implements AssociadoRepository {
 	private AssociadoJpa buildAssociadoJpa(Associado associado) {
 		AssociadoJpa associadoJpa = new AssociadoJpa();
 		associadoJpa.setNome(associado.getNome());
+		associadoJpa.setNomeDaMae(associado.getNomeDaMae());
+		associadoJpa.setTelefone(associado.getTelefone());
 		associadoJpa.setCpf(associado.getCpf());
+		associadoJpa.setRg(associado.getRg());
 		associadoJpa.setTipo(associado.getTipoPlano());
-		associadoJpa.setTipo(TipoPlano.EMPRESARIAL);
+		associadoJpa.setDataNascimento(associado.getDataNascimento());
+		associadoJpa.setTitular(associado.getTitular());
+		associadoJpa.setStatus(associado.getStatus());
 		associadoJpa.setNumeroCarteira(associado.getNumeroCarteira());
+		associadoJpa.setTipo(TipoPlano.EMPRESARIAL);
+		associadoJpa.setTitular(associado.getTitular());
 		return associadoJpa;
 	}
 
 	@Override
 	public Associado findByCpf(String cpf) {
-		AssociadoJpa associadoJpa = this.repository.findByCpf(cpf);
+		AssociadoJpa associadoJpa = this.repository.findByCpfNumeroCpf(cpf);
 		return buildAssociado(associadoJpa);
 	}
 }

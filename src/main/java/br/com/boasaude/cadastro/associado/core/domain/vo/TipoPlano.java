@@ -10,9 +10,13 @@ public enum TipoPlano {
 
     private String value;
 
-     TipoPlano(String value){
-        this.value = value;
-    }
+	TipoPlano(String value) {
+		this.value = value;
+	}
+
+	@Deprecated
+		TipoPlano() {
+	}
 
     @Override
     public String toString() {

@@ -1,14 +1,25 @@
 package br.com.boasaude.cadastro.associado.core.domain.vo;
 
+import javax.persistence.Embeddable;
+
+@Embeddable
 public class Rg {
 
-	private String numero;
+	private String numeroRg;
 
-	public String getNumero() {
-		return numero;
+	public Rg(String rg) {
+		this.numeroRg = rg;
+	}
+	
+	@Deprecated
+	public Rg() {
 	}
 
-	public void setNumero(String numero) {
-		this.numero = numero;
+	public String getNumeroRg() {
+		return numeroRg;
+	}
+
+	public void setNumeroRg(String numero) {
+		this.numeroRg = numero;
 	}
 }

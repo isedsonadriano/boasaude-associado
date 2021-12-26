@@ -23,5 +23,26 @@ public class AssociadoRequest {
 	@ApiModelProperty(notes = "Cpf do associado",name="cpf",required=true,value="Teste Cpf")
 	private String cpf;
 	
+	@ApiModelProperty(notes = "data de nascimento do associado",name="dataNascimento",required=true,value="Teste dataNascimento")
+	private String dataNascimento;
+	
+	@ApiModelProperty(notes = "Rg do associado",name="rg",required=true,value="Teste Rg")
+	private String rg;
+	
+	@ApiModelProperty(notes = "Nome da mãe do associado",name="rg",required=true,value="Teste nome da mãe")
+	private String nomeDaMae;
+	
+	@ApiModelProperty(notes = "Telefone do associado",name="telefone",required=true,value="Teste telefone")
+	private String telefone;
+	
+	@ApiModelProperty(notes = "Tipo do plano do associado",name="tipoPlano",required=true,value="Teste Tipo plano")
+	private String tipoPlano;
+	
+	@ApiModelProperty(notes = "Número carteira do associado",name="numeroCarteira",required=true,value="Teste número carteira")
+	private String numeroCarteira;
+	
+	@ApiModelProperty(notes = "boolean se associado é o titular",name="titular",required=true,value="Teste titular")
+	private Boolean titular;
+	
 
 }

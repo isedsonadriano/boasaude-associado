@@ -1,21 +1,25 @@
 package br.com.boasaude.cadastro.associado.core.domain.vo;
 
+import javax.persistence.Embeddable;
+
+@Embeddable
 public class Cpf {
 
-	private String numero;
+	private String numeroCpf;
 
 	public Cpf(String cpf) {
-		this.numero = cpf;
+		this.numeroCpf = cpf;
 	}
 	
+	@Deprecated
 	public Cpf() {
 	}
 
-	public String getNumero() {
-		return numero;
+	public String getNumeroCpf() {
+		return numeroCpf;
 	}
 
-	public void setNumero(String numero) {
-		this.numero = numero;
+	public void setNumeroCpf(String numero) {
+		this.numeroCpf = numero;
 	}
 }

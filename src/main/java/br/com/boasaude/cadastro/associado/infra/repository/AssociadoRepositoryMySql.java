@@ -8,7 +8,7 @@ import br.com.boasaude.cadastro.associado.infra.repository.orm.AssociadoJpa;
 @Repository
 public interface AssociadoRepositoryMySql extends JpaRepository<AssociadoJpa, Long> {
 
-	AssociadoJpa findByCpf(String cpf);
+	AssociadoJpa findByCpfNumeroCpf(String cpf);
 
 
 }

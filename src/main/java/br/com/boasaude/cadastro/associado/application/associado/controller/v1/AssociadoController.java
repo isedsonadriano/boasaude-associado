@@ -1,6 +1,7 @@
 package br.com.boasaude.cadastro.associado.application.associado.controller.v1;
 
 import java.net.URI;
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Objects;
 import java.util.stream.Collectors;
@@ -61,6 +62,7 @@ public class AssociadoController  {
 	@ResponseBody
 	public ResponseEntity<AssociadoResponse> salvar(@RequestBody @Valid AssociadoRequest associadoRequest, UriComponentsBuilder uriBuilder) {
 		Associado associado = buildAssociado(associadoRequest);
+		associado.setDataNascimento(LocalDateTime.now());
 		this.service.salvar(associado);
 		URI uri = uriBuilder.path("{id}").buildAndExpand(associado.getId()).toUri();
 		return ResponseEntity.created(uri).body(buildAssociadoResponse(associado));
@@ -80,7 +82,8 @@ public class AssociadoController  {
 	public ResponseEntity<AssociadoResponse> catpurar(@PathVariable Long id) {
 		Associado associado = service.capturarPorId(id);
 		if (Objects.nonNull(associado)) {
-			return ResponseEntity.ok(buildAssociadoResponse(associado));
+			AssociadoResponse response = buildAssociadoResponse(associado);
+			return ResponseEntity.ok(response);
 		}
 		return ResponseEntity.notFound().build();
 	}

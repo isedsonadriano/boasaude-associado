@@ -1,6 +1,7 @@
 package br.com.boasaude.cadastro.associado.core.service.implementation;
 
 import br.com.boasaude.cadastro.associado.core.domain.entity.Associado;
+import br.com.boasaude.cadastro.associado.core.domain.enums.Status;
 import br.com.boasaude.cadastro.associado.core.exception.DomainException;
 import br.com.boasaude.cadastro.associado.core.repository.AssociadoRepository;
 import br.com.boasaude.cadastro.associado.core.service.AssociadoService;
@@ -29,7 +30,9 @@ public class AssociadoServiceImpl implements AssociadoService {
 
 	@Override
 	public void salvar(Associado associado) {
-		DomainException.throwIf(Objects.nonNull(this.clientRepository.findByCpf(associado.getCpf().getNumero())), "Associado já cadastrado");
+		DomainException.throwIf(Objects.nonNull(this.clientRepository.findByCpf(associado.getCpf().getNumeroCpf())), "Associado já cadastrado");
+		associado.setStatus(Status.ATIVO);
+		associado.setTitular(Boolean.TRUE);
 		this.clientRepository.salvar(associado);
 	}
 
